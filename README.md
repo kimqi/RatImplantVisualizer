@@ -25,7 +25,10 @@ cd rat-atlas-implant-viz
 
 Create virtual environment and install requirements
 ```bash
-python -m venv .venv && source .venv/bin/activate
+python -m venv .venv
+source .venv/bin/activate     # macOS/Linux
+# .\.venv\Scripts\Activate     # Windows PowerShell
+
 pip install -r requirements.txt
 ```
 
