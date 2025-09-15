@@ -58,5 +58,5 @@ Scomb_bot, Scomb_top = plot_implant_coords(
 
 ## Notes
 - Requires internet connection: images are fetched on demand from labs.gaidi.ca.
-- If the API is down, you will see “Image unavailable” placeholders.
-- Pillow is optional, **but without it markers will not be drawn on the images.**
+- If the API is down, images will be unavailable
+- Pillow is required for markers
