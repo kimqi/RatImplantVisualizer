@@ -50,8 +50,8 @@ Scomb_bot, Scomb_top = plot_implant_coords(
     ML=2.5,
     DV=2.8,
     angle=30,
-    span=750,       # microns
-    skull_t=500,    # microns
+    span=750,      # microns
+    skull_t=500,   # microns
     vert_span=200  # microns (optional top span)
 )
 ```
