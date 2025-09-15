@@ -41,15 +41,15 @@ Or use the API directly in Python
 ```python
 from rat_brain_atlas_api import plot_implant_coords
 
-# Example: AP = -3.6 mm, ML = 2.5 mm, DV = 2.8 mm, angle = 15 degrees
+# Example: AP = -3.6 mm, ML = 2.5 mm, DV = 2.8 mm, angle = 30 degrees and plot 200 micron span (top to bottom)
 Scomb_bot, Scomb_top = plot_implant_coords(
     AP=-3.6,
     ML=2.5,
     DV=2.8,
-    angle=15,
+    angle=30,
     span=750,       # microns
     skull_t=500,    # microns
-    vert_span=2000  # microns (optional top span)
+    vert_span=200  # microns (optional top span)
 )
 ```
 
