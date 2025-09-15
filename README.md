@@ -35,9 +35,10 @@ pip install -r requirements.txt
 ---
 
 ## Usage
-Launch Jupyter
+Launch Jupyter and run the notebook
 ```
 jupyter lab
+# jupyter notebook
 ```
 
 Or use the API directly in Python
