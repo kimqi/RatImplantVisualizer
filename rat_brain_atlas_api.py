@@ -185,7 +185,7 @@ def plot_implant_coords(
     angle: float,
     *,
     span: float = 750.0,       # microns
-    skull_t: float = 500.0,    # microns (your MATLAB default noted)
+    skull_t: float = 500.0,    # microns
     vert_span: float = float("nan"),  # microns
     plot_radius: int = 5       # pixels for drawn circle
 ) -> Tuple[CombinedAtlas, Optional[CombinedAtlas]]:
@@ -199,17 +199,18 @@ def plot_implant_coords(
     span_mm = span / 1000.0
     skull_mm = skull_t / 1000.0
     vert_mm = (vert_span / 1000.0) if not math.isnan(vert_span) else float("nan")
+    #angle = -float(angle)  # flip rotation sense: +θ now behaves like previous -θ
 
     # Bottom (tip) coordinates in mm
     center_bot = np.array([AP, ML, DV + skull_mm])
-    left_bot   = np.array([AP - _sind(angle) * span_mm / 2.0,
-                           ML - _cosd(angle) * span_mm / 2.0,
+    left_bot   = np.array([AP - _sind(-angle) * span_mm / 2.0,
+                           ML - _cosd(-angle) * span_mm / 2.0,
                            DV + skull_mm])
-    right_bot  = np.array([AP + _sind(angle) * span_mm / 2.0,
-                           ML + _cosd(angle) * span_mm / 2.0,
+    right_bot  = np.array([AP + _sind(-angle) * span_mm / 2.0,
+                           ML + _cosd(-angle) * span_mm / 2.0,
                            DV + skull_mm])
 
-    # Optional top coordinates (if vert_span provided)
+    # Optional top coordinates if vert_span is given
     if not math.isnan(vert_span):
         center_top = center_bot - np.array([0.0, 0.0, vert_mm])
         left_top   = left_bot   - np.array([0.0, 0.0, vert_mm])
@@ -229,7 +230,7 @@ def plot_implant_coords(
     # Consolidate and add markers
     Scomb_bot = _consolidate(Sleft, Scenter, Sright)
 
-    # For horizontal images, MATLAB inserts all three markers on each image
+    # For horizontal images, insert all three markers on each image
     horiz_triplet = [
         (Sleft.horizontal.left,   Sleft.horizontal.top,   plot_radius),
         (Scenter.horizontal.left, Scenter.horizontal.top, plot_radius),
@@ -237,7 +238,7 @@ def plot_implant_coords(
     ]
     Scomb_bot = _insert_markers_on_planes(Scomb_bot, radius_px=plot_radius, multi_mark_horizontal=horiz_triplet)
 
-    # Optional top
+    # Optional top I guess
     Scomb_top = None
     if center_top is not None:
         Sleft_t   = S_at(left_top)
@@ -252,7 +253,7 @@ def plot_implant_coords(
         ]
         Scomb_top = _insert_markers_on_planes(Scomb_top, radius_px=plot_radius, multi_mark_horizontal=horiz_triplet_t)
 
-    # --- Plot like MATLAB (2 rows x 3 cols): top row = coronal, bottom = horizontal ---
+    # --- Plot like Utku's code
     def _imshow(ax, pil_img, title=None):
         if pil_img is None:
             ax.text(0.5, 0.5, "Image unavailable", ha="center", va="center")
@@ -276,7 +277,7 @@ def plot_implant_coords(
 
     axes[1].set_title(f"Bottom Electrode Locations {angle}°", fontsize=12)
 
-    # Top (if requested)
+    # Top (if called)
     if Scomb_top is not None:
         fig2 = plt.figure(figsize=(18, 6))
         axes2 = [plt.subplot(2, 3, i) for i in range(1, 7)]
