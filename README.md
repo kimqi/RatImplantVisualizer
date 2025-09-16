@@ -4,7 +4,7 @@ Python tools for visualizing electrode implant coordinates in the rat brain atla
 This is a Python port of MATLAB code originally used to generate coronal, sagittal, and horizontal atlas slices with implant markers.
 
 Original MATLAB API written by Matt Gaidica at: [Rat Brain Atlas API](https://github.com/mattgaidica/RatBrainAtlasAPI).
-The code queries an online API for the [Rat Brain Atlas](https://labs.gaidi.ca/rat-brain-atlas/), and demarcates implant coordinates.
+The code queries an online API for the [Rat Brain Atlas](https://labs.gaidi.ca/rat-brain-atlas/), and demarcates implant coordinates using implant code by Utku Kaya from [Diba Lab ePhys](https://github.com/diba-lab/ephys).
 
 ---
 
